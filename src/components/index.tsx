@@ -1,7 +1,4 @@
-import React from 'react';
-
-const Indes = () => {
-  return <div>Indes</div>;
-};
-
-export default Indes;
+export * from './Layout';
+export * from './providers';
+export * from './Navbar';
+export * from './Overlay';
