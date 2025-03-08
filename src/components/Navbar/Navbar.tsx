@@ -25,7 +25,7 @@ const Navbar = () => {
       {/* Navbar */}
       <div className="w-full h-[56px] border-b border-gray-200 bg-white">
         <div className="w-full max-w-[1400px] h-full mx-auto flex items-center justify-between px-4">
-          <h1 className="text-2xl font-bold text-gray-900">
+          <h1 className="text-base font-bold text-gray-900">
             {NAV_LINKS.find((link) => link.href === pathname)?.name || 'FundWave'}
           </h1>
           <button
@@ -49,8 +49,8 @@ const Navbar = () => {
         {/* Sidebar Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-2xl font-bold text-gray-900">FundWave</h2>
-            <p className="text-sm text-gray-500">Crowdfunding for everyone</p>
+            <h2 className="text-base font-bold text-gray-900">FundWave</h2>
+            <p className="text-xs text-gray-500">Crowdfunding for everyone</p>
           </div>
           <button
             onClick={toggleSidebar}
@@ -71,8 +71,8 @@ const Navbar = () => {
                     : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
                 }`}
               >
-                <Icon className="text-2xl" />
-                <span className="text-lg font-medium">{name}</span>
+                <Icon className="text-basel" />
+                <span className="text-sm font-medium">{name}</span>
               </a>
             </li>
           ))}

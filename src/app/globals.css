@@ -8,11 +8,12 @@
 
   --breakpoint-tablet: 970px;
 
-  /* --color-primary: #0070f3; */
+  --color-grey: #64748b;
+  --color-primary: #179ece;
 }
 
 :root {
-  --background: #ffffff;
+  --background: #fdfffe;
   --foreground: #171717;
 }
 
