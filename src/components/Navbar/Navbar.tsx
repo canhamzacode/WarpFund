@@ -11,7 +11,8 @@ import { AiOutlinePlusCircle, AiOutlineUser } from 'react-icons/ai';
 const NAV_LINKS = [
   { name: 'Home', href: '/', icon: RiHome6Line },
   { name: 'Create Campaign', href: '/create', icon: AiOutlinePlusCircle },
-  { name: 'Dashboard', href: '/dashboard', icon: AiOutlineUser }
+  { name: 'Dashboard', href: '/dashboard', icon: AiOutlineUser },
+  { name: 'Explore', href: '/explore', icon: RiHome6Line }
 ];
 
 const Navbar = () => {
