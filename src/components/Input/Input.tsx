@@ -68,7 +68,7 @@ const InputField: React.FC<CustomInputProps> = ({
       )}
       <div
         className={`flex items-center gap-3 border p-2 rounded-md transition-all duration-200 ${
-          isFocused ? 'border-primary' : 'border-grey'
+          isFocused ? 'border-primary' : 'muted-foreground'
         } ${containerClass}`}
       >
         {icon && <div>{icon}</div>}

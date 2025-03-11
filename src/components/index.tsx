@@ -9,3 +9,4 @@ export * from './CampaignCard';
 export * from './CampaignsList';
 export * from './Navigation';
 export * from './ExploreFilter';
+export * from './SelectInput';
