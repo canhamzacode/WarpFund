@@ -10,3 +10,30 @@ export const campaigns = [
     image: ''
   }
 ];
+
+export const CATEGORIES = [
+  {
+    label: 'Select Category',
+    value: 'default'
+  },
+  {
+    label: 'Education',
+    value: 'education'
+  },
+  {
+    label: 'Health',
+    value: 'health'
+  },
+  {
+    label: 'Technology',
+    value: 'technology'
+  },
+  {
+    label: 'Environment',
+    value: 'environment'
+  },
+  {
+    label: 'Social',
+    value: 'social'
+  }
+];

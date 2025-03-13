@@ -2,34 +2,9 @@ import React from 'react';
 import { Input } from '../Input';
 import { IoSearchOutline } from 'react-icons/io5';
 import { SelectInput } from '../SelectInput';
+import { CATEGORIES } from '@/constants';
 
 const ExploreFilter = () => {
-  const categories = [
-    {
-      label: 'Select Category',
-      value: 'default'
-    },
-    {
-      label: 'Education',
-      value: 'education'
-    },
-    {
-      label: 'Health',
-      value: 'health'
-    },
-    {
-      label: 'Technology',
-      value: 'technology'
-    },
-    {
-      label: 'Environment',
-      value: 'environment'
-    },
-    {
-      label: 'Social',
-      value: 'social'
-    }
-  ];
   return (
     <div className="w-full flex flex-col gap-3 px-4">
       <div className="w-full grid grid-cols-2 gap-4">
@@ -44,7 +19,7 @@ const ExploreFilter = () => {
         <SelectInput
           withFormik={false}
           name="categories"
-          options={categories}
+          options={CATEGORIES}
           className="w-full rounded-4xl"
         />
       </div>

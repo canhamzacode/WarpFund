@@ -42,7 +42,7 @@ const SelectInput: React.FC<SelectInputProps> = ({
   const renderSelect = (field?: FieldProps['field']) => (
     <div className={`flex flex-col gap-2 w-full ${containerClass}`}>
       {label && (
-        <label htmlFor={name} className="tablet:text-lg text-sm">
+        <label htmlFor={name} className="tablet:text-sm text-sm">
           {label}
         </label>
       )}
