@@ -7,6 +7,7 @@ import { HiOutlineBars3 } from 'react-icons/hi2';
 import { Overlay } from '../Overlay';
 import { RiHome6Line } from 'react-icons/ri';
 import { AiOutlinePlusCircle, AiOutlineUser } from 'react-icons/ai';
+import { ConnectButton } from '../ConnectButton';
 
 const NAV_LINKS = [
   { name: 'Home', href: '/', icon: RiHome6Line },
@@ -29,12 +30,17 @@ const Navbar = () => {
           <h1 className="text-base font-bold text-gray-900">
             {NAV_LINKS.find((link) => link.href === pathname)?.name || 'FundWave'}
           </h1>
-          <button
-            onClick={toggleSidebar}
-            className="cursor-pointer text-gray-700 hover:text-gray-900 transition"
-          >
-            <HiOutlineBars3 size={28} />
-          </button>
+          <div className="flex items-center gap-3">
+            <div>
+              <ConnectButton />
+            </div>
+            <button
+              onClick={toggleSidebar}
+              className="cursor-pointer text-gray-700 hover:text-gray-900 transition"
+            >
+              <HiOutlineBars3 size={28} />
+            </button>
+          </div>
         </div>
       </div>
 

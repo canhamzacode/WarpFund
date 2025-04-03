@@ -1,8 +1,10 @@
 import React from 'react';
 import { ImageUploader } from '../ImageUploader';
 import { TextArea } from '../TextArea';
+import { useFormikContext } from 'formik';
 
 const MediaAndStory = () => {
+  const { setFieldValue } = useFormikContext();
   return (
     <div className="w-full flex flex-col gap-6">
       <div>
@@ -12,10 +14,17 @@ const MediaAndStory = () => {
         </p>
       </div>
       <div className="w-full flex flex-col gap-4">
-        <ImageUploader name="campaignImage" label="Campaign Image" />
+        <ImageUploader
+          name="campaignImage"
+          label="Campaign Image"
+          onChange={(e) => {
+            setFieldValue('campaignImage', e);
+            console.log(e);
+          }}
+        />
         <div>
           <TextArea
-            name="campaignDescription"
+            name="description"
             label="Campaign Description"
             rows={6}
             placeholder="Share your story. Why is this important? How will the fund be used? "

@@ -17,3 +17,4 @@ export * from './ProgressBar';
 export * from './TextArea';
 export * from './ImageUploader';
 export * from './MediaAndStory';
+export * from './ConnectButton';

@@ -1,9 +1,17 @@
 import React from 'react';
 import { Input } from '../Input';
 import { SelectInput } from '../SelectInput';
-import { CATEGORIES } from '@/constants';
+import { useCampaign } from '@/modules/CreateCampaign/hooks';
 
 const CampaignDetails = () => {
+  const { categories } = useCampaign();
+
+  const allCategories = categories.map((category, index) => ({
+    label: category,
+    value: String(index)
+  }));
+
+  console.log('categories', categories);
   return (
     <div className="w-full flex flex-col gap-6">
       <div>
@@ -14,7 +22,12 @@ const CampaignDetails = () => {
       </div>
       <div className="w-full flex flex-col gap-4">
         <Input name="title" label="Title" placeholder="eg. Help Save Our Local Animal Shelter" />
-        <SelectInput name="category" label="Category" options={CATEGORIES} className="w-full" />
+        <SelectInput
+          name="categoryIndex"
+          label="Category"
+          options={allCategories}
+          className="w-full"
+        />
         <Input name="goal" type="number" label="Fundraising Goal ($)" placeholder="eg. 5000" />
         <Input name="endDate" type="date" label="End Date" />
       </div>
