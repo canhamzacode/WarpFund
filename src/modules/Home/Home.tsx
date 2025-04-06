@@ -2,9 +2,9 @@
 
 import { CampaignsList, FilterBar, HeroSection } from '@/components';
 import { FILTERS } from '@/constants';
+import { useCampaign } from '@/hooks';
 import { FilterTypes } from '@/types';
 import React, { useEffect, useState } from 'react';
-import { useCampaign } from '../CreateCampaign/hooks';
 
 const Home = () => {
   const [activeFilter, setActiveFilter] = useState<FilterTypes>(FILTERS[0]);

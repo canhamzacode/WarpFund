@@ -1,7 +1,7 @@
 import React from 'react';
 import { Input } from '../Input';
 import { SelectInput } from '../SelectInput';
-import { useCampaign } from '@/modules/CreateCampaign/hooks';
+import { useCampaign } from '@/hooks';
 
 const CampaignDetails = () => {
   const { categories } = useCampaign();

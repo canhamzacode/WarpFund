@@ -1,11 +1,9 @@
 'use client';
 import { CampaignDetails, MediaAndStory, ProgressBar, StepNavigation } from '@/components';
-import { useMultiStepForm } from '@/hooks';
+import { useCampaign, useMultiStepForm } from '@/hooks';
 import { Form, Formik } from 'formik';
 import React from 'react';
 import { campaignDetailsSchema, mediaAndStorySchema } from './schema';
-import { useCampaign } from './hooks';
-import useInteract from './hooks/useInteract';
 
 interface ICampaign {
   title: string;
@@ -31,9 +29,7 @@ const steps = [
 
 const CreateCampaign = () => {
   const { createCampaign } = useCampaign();
-  const { data } = useInteract();
 
-  console.log('Data', data);
   const { step, stepIndex, isLastStep, isFirstStep, next, prev } = useMultiStepForm({
     steps: steps.map((s) => s.component)
   });
@@ -74,7 +70,7 @@ const CreateCampaign = () => {
                 title: values.title,
                 description: values.description,
                 goal: values.goal,
-                duration, // Use the correct duration
+                duration,
                 categoryIndex: values.categoryIndex
               });
             } else {
@@ -104,33 +100,3 @@ const CreateCampaign = () => {
 };
 
 export default CreateCampaign;
-
-// const CreateCampaign = () => {
-//   const { data, loading, error } = useInteract();
-
-//   useEffect(() => {
-//     if (data) {
-//       console.log('Categories Data:', data); // This should log ["Technology"]
-//     }
-//   }, [data]);
-
-//   if (loading) return <div>Loading categories...</div>;
-//   if (error) return <div>Error: {error}</div>;
-
-//   return (
-//     <div>
-//       <h3>Categories</h3>
-//       {data && data.length > 0 ? (
-//         <ul>
-//           {data.map((category, index) => (
-//             <li key={index}>{category}</li>
-//           ))}
-//         </ul>
-//       ) : (
-//         <div>No categories available.</div>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default CreateCampaign;

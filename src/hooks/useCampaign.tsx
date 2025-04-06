@@ -3,7 +3,8 @@ import { useWriteContract } from 'wagmi';
 import { CONTRACT_CONFIG, ABI } from '@/lib/contract';
 import { useState, useEffect } from 'react';
 import { publicClient } from '@/lib/interactor/interactor';
-import { Campaign } from '@/types';
+import { Campaign, ContractCampaign, NewCampaignInput } from '@/types';
+import { parseCampaign } from '@/lib/utils/index';
 
 const useCampaign = () => {
   const { writeContract, isPending, isSuccess, error } = useWriteContract();
@@ -34,14 +35,9 @@ const useCampaign = () => {
     fetchCategories();
   }, []);
 
-  // Function to create a new campaign
-  const createCampaign = async ({
-    title,
-    description,
-    goal,
-    duration,
-    categoryIndex
-  }: Campaign) => {
+  const createCampaign = async (campaignData: NewCampaignInput) => {
+    const { title, description, goal, duration, categoryIndex } = campaignData;
+
     if (!title || !description || !goal || !duration) {
       alert('Please fill all fields.');
       return;
@@ -56,15 +52,25 @@ const useCampaign = () => {
         categoryIndex: BigInt(categoryIndex)
       });
 
-      const result = writeContract({
+      const result = await writeContract({
         abi: CONTRACT_CONFIG.abi,
         address: CONTRACT_CONFIG.address,
         functionName: 'createCampaign',
-        args: [title, description, goal, Number(duration), Number(categoryIndex)]
+        args: [title, description, BigInt(goal), BigInt(duration), BigInt(categoryIndex)]
+      });
+
+      const unwatch = publicClient.watchContractEvent({
+        address: CONTRACT_CONFIG.address,
+        abi: ABI,
+        eventName: 'CampaignCreated',
+        onLogs: (logs) => {
+          console.log('Event logs:', logs);
+        }
       });
 
       console.log('Transaction Sent:', result);
-      return result.hash;
+      console.log('unwatch', unwatch);
+      return result;
     } catch (err) {
       console.error('Transaction Error:', err);
     }
@@ -79,11 +85,12 @@ const useCampaign = () => {
       });
 
       console.log('Contract Campaign:', result);
-      // setCategories(result as string[]);
-      setCampaigns(result as Campaign[]);
+
+      const campaignsArray: Campaign[] = (result as readonly ContractCampaign[]).map(parseCampaign);
+
+      setCampaigns(campaignsArray);
     } catch (err) {
-      console.error('Error fetching categories:', err);
-      setCategoryError((err as Error).message);
+      console.error('Error fetching campaigns:', err);
     } finally {
       setLoadingCategories(false);
     }
