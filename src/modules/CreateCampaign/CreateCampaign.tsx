@@ -2,8 +2,11 @@
 import { CampaignDetails, MediaAndStory, ProgressBar, StepNavigation } from '@/components';
 import { useCampaign, useMultiStepForm } from '@/hooks';
 import { Form, Formik } from 'formik';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { campaignDetailsSchema, mediaAndStorySchema } from './schema';
+import { toast } from 'sonner';
+
+import { useRouter } from 'next/navigation';
 
 interface ICampaign {
   title: string;
@@ -28,11 +31,25 @@ const steps = [
 ];
 
 const CreateCampaign = () => {
-  const { createCampaign } = useCampaign();
+  const { createCampaign, isPending, isSuccess } = useCampaign();
+  const router = useRouter();
 
   const { step, stepIndex, isLastStep, isFirstStep, next, prev } = useMultiStepForm({
     steps: steps.map((s) => s.component)
   });
+
+  useEffect(() => {
+    console.log('CreateCampaign: isPending', isPending, 'isSuccess', isSuccess);
+    if (isPending) {
+      toast.loading('Creating campaign...');
+    } else {
+      toast.dismiss();
+    }
+    if (isSuccess) {
+      toast.success('Campaign created successfully!');
+      router.push('/explore');
+    }
+  }, [isSuccess, isPending]);
 
   const calculateDuration = (endDate: string) => {
     if (!endDate) return 0;
@@ -89,6 +106,7 @@ const CreateCampaign = () => {
                   isLastStep={isLastStep}
                   handleSubmit={handleSubmit}
                   prev={prev}
+                  loading={isPending}
                 />
               </Form>
             );

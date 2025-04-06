@@ -7,13 +7,15 @@ interface StepNavigationProps {
   isLastStep: boolean;
   handleSubmit: () => void;
   prev: () => void;
+  loading?: boolean;
 }
 
 const StepNavigation: React.FC<StepNavigationProps> = ({
   isFirstStep,
   isLastStep,
   handleSubmit,
-  prev
+  prev,
+  loading = false
 }) => {
   return (
     <div
@@ -33,7 +35,7 @@ const StepNavigation: React.FC<StepNavigationProps> = ({
         className="w-full"
         iconPosition="right"
       >
-        {isLastStep ? 'Send Invitation' : 'Continue'}
+        {loading ? 'Loading...' : isLastStep ? 'Create Campaign' : 'Continue'}
       </Button>
     </div>
   );

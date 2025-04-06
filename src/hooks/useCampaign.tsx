@@ -7,7 +7,7 @@ import { Campaign, ContractCampaign, NewCampaignInput } from '@/types';
 import { parseCampaign } from '@/lib/utils/index';
 
 const useCampaign = () => {
-  const { writeContract, isPending, isSuccess, error } = useWriteContract();
+  const { writeContract, isPending, isSuccess, error: writeContractErr } = useWriteContract();
   const [categories, setCategories] = useState<string[]>([]);
   const [categoryError, setCategoryError] = useState<string | null>(null);
   const [loadingCategories, setLoadingCategories] = useState<boolean>(true);
@@ -73,6 +73,8 @@ const useCampaign = () => {
       return result;
     } catch (err) {
       console.error('Transaction Error:', err);
+    } finally {
+      setLoadingCategories(false);
     }
   };
 
@@ -100,7 +102,7 @@ const useCampaign = () => {
     createCampaign,
     isPending,
     isSuccess,
-    error,
+    writeContractErr,
     categories,
     loadingCategories,
     categoryError,
